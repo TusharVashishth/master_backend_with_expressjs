@@ -1,6 +1,6 @@
 import prisma from "../DB/db.config.js";
 import { generateRandomNum, imageValidator } from "../utils/helper.js";
-
+import path from "path";
 class ProfileController {
   static async index(req, res) {
     try {
@@ -34,7 +34,7 @@ class ProfileController {
         });
       }
 
-      const imgExt = profile?.name.split(".");
+      const imgExt = path.extname(profile.name);
       const imageName = generateRandomNum() + "." + imgExt[1];
       const uploadPath = process.cwd() + "/public/images/" + imageName;
 
