@@ -1,6 +1,7 @@
 import { supportedMimes } from "../config/filesystem.js";
 import { v4 as uuidv4 } from "uuid";
 import fs from "fs";
+import path from "path";
 
 export const imageValidator = (size, mime) => {
   if (bytesToMb(size) > 2) {
@@ -33,7 +34,7 @@ export const removeImage = (imageName) => {
 
 // * Upload image
 export const uploadImage = (image) => {
-  const imgExt = image?.name.split(".");
+  const imgExt = path.extname(image?.name);
   const imageName = generateRandomNum() + "." + imgExt[1];
   const uploadPath = process.cwd() + "/public/images/" + imageName;
   image.mv(uploadPath, (err) => {
